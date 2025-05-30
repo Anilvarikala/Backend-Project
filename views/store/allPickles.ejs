@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSV Pickles - All Products</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        padding: 2rem 0;
+      }
+      .pickle-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+      }
+      .pickle-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        overflow: hidden;
+        height: 100%;
+      }
+      .pickle-card:hover {
+        transform: translateY(-5px);
+      }
+      .pickle-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .card-body {
+        padding: 1.5rem;
+      }
+      .pickle-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+      }
+      .pickle-details {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 1rem;
+      }
+      .pickle-details li {
+        margin-bottom: 0.5rem;
+        color: #666;
+      }
+      .price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #28a745;
+      }
+      .details-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        margin:5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+      }
+      .details-btn:hover {
+        background-color: #218838;
+        color: white;
+      }
+      .section-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+  <!-- include the nav partial-->
+    <%- include('../partials/nav') %>
+   
+    <div class="container">
+      <h1 class="section-title">Our Pickle Collection</h1>
+      <div class="pickle-grid">
+        <% allPickles && allPickles.map((pickle) => { %>
+        <div class="pickle-card">
+          <img
+            src="<%=pickle.url%>"
+            alt="<%=pickle.pickleName%>"
+            class="pickle-image"
+          />
+          <div class="card-body">
+            <h3 class="pickle-name"><%=pickle.pickleName%></h3>
+            <ul class="pickle-details">
+              <li>
+                <i class="fas fa-weight-hanging"></i> Weight: <%=pickle.grams%>g
+              </li>
+              <li>
+                <i class="fas fa-rupee-sign"></i>
+                <span class="price"><%=pickle.price%></span>
+              </li>
+              <li>
+                <i class="fas fa-info-circle"></i> <%=pickle.description%>
+              </li>
+            </ul>
+            <a href="/pickle/<%=pickle.id%>" class="details-btn">
+              <i class="fas fa-eye"></i> View Details
+            </a>
+            <form action="/favourite/<%=pickle._id%>" method="POST">
+              <Button type="submit">Mark Favourite</Button>
+            </form>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
