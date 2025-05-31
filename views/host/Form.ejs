@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add New Pickle</title>
+    <title><%= editing ? 'Edit' : 'Add' %> Pickle</title>
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -55,8 +55,12 @@
   <body>
     <div class="container">
       <div class="form-container">
-        <h2 class="form-title">Add New Pickle</h2>
-        <form action="/host/add-pickle" method="POST">
+       
+        <h2 class="form-title"><%= editing? 'Edit' : 'Add' %> New Pickle</h2>
+        <form
+          action="<%= editing ? '/host/edit-pickle/' + currPickle._id : '/host/add-pickle' %>"
+          method="POST"
+        >
           <div class="form-floating">
             <input
               type="text"
@@ -64,6 +68,7 @@
               id="pickleName"
               name="pickleName"
               placeholder="Pickle Name"
+              value="<%= currPickle?.pickleName || '' %>"
               required
             />
             <label for="pickleName">Pickle Name</label>
@@ -71,11 +76,12 @@
 
           <div class="form-floating">
             <input
-              type="url"
+              type="text"
               class="form-control"
               id="url"
               name="url"
               placeholder="Image URL"
+              value="<%= currPickle?.url || '' %>"
               required
             />
             <label for="url">Image URL</label>
@@ -89,6 +95,7 @@
               name="grams"
               placeholder="Grams"
               min="0"
+              value="<%= currPickle?.grams || '' %>"
               required
             />
             <label for="grams">Weight (in grams)</label>
@@ -103,6 +110,7 @@
               placeholder="Price"
               min="0"
               step="0.01"
+              value="<%= currPickle?.price || '' %>"
               required
             />
             <label for="price">Price</label>
@@ -113,7 +121,7 @@
               type="date"
               class="form-control"
               id="data"
-              name="data"                 
+              name="data"
               required
             />
             <label for="data">Manufacturing Date</label>
@@ -127,11 +135,11 @@
               placeholder="Enter description..."
               style="height: 100px"
               required
-            ></textarea>
+            ><%= currPickle?.description || '' %></textarea>
             <label for="description">Description</label>
           </div>
 
-          <button type="submit" class="btn-submit">Add Pickle</button>
+          <button type="submit" class="btn-submit"><%= editing ? 'Update' : 'Add' %> Pickle</button>
         </form>
       </div>
     </div>

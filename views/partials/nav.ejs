@@ -1,16 +1,28 @@
 <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <ul class="nav-links d-flex justify-content-center w-100">
-          <a href="/" class="btn btn-outline-primary mx-2">Home</a>
-          <a href="/all-pickles" class="btn btn-outline-primary mx-2"
-            >All Pickles</a
-          >
-          <a href="/host/add-pickle" class="btn btn-outline-primary mx-2"
-            >Add Pickle</a
-          >
-          <a href="/favourites" class="btn btn-outline-primary mx-2"
-            >Favourites</a
-          >
-        </ul>
-      </div>
-    </nav>
+  <div class="container">
+    <ul class="nav-links d-flex justify-content-center w-100">
+      <a href="/" class="btn btn-outline-primary mx-2">Home</a>
+      <a href="/all-pickles" class="btn btn-outline-primary mx-2"
+        >All Pickles</a
+      >
+      <% if(user.userType === "host"){%>
+      <a href="/host/add-pickle" class="btn btn-outline-primary mx-2"
+        >Add Pickle</a
+      ><%}%>
+      <a href="/favourites" class="btn btn-outline-primary mx-2">Favourites</a>
+      <% if(isLoggedIn == false){%>
+      <a href="/signup" class="btn btn-outline-primary mx-2"> Signup</a
+      ><%}%> <% if(isLoggedIn == true){%>
+      <form action="/logout" method="post">
+        <button class="btn btn-outline-primary mx-2">Logout</button>
+        <input type="hidden" /><%}%>
+      </form>
+       <% if(user.userType === "host"){%>
+      <a href="/host/host-pickles" class="btn btn-outline-primary mx-2"
+        >Host Pickles</a
+      ><%}%>
+       <a href="/cart" class="btn btn-outline-primary mx-2">Cart</a>
+      <a href="/Profile" class="btn btn-outline-primary mx-2">Profile</a>
+    </ul>
+  </div>
+</nav>

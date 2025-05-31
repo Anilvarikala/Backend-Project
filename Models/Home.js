@@ -18,8 +18,8 @@ const homeSchema = mongoose.Schema({
       type:Number,
       required:true
     },
-    date:{
-      type:String,
+    data:{
+      type:Date,
     },
     description:{
       type:String, 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+</head>
+<body>
+  <form action="/signup" method="post">
+    <input type="text" placeholder="firstName" name="firstName">
+    <input type="text" placeholder="LastName" name="lastName">
+    <input type="email" placeholder="Enter your email id ? " name = "email">
+    <input type="password" placeholder="Enter your password" name="password">
+    <input type="password" placeholder="Confirm password" name="confirmPassword">
+    <label for="Guest">Guest</label>
+    <input type="radio" name="userType" id="guest" value="guest">
+    <label for="Host">Host</label>
+    <input type="radio" name="userType" id="host" value="host">
+    <input type="submit">
+  </form>
+</body>
+</html>

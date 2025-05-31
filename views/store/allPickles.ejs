@@ -113,12 +113,16 @@
               <li>
                 <i class="fas fa-info-circle"></i> <%=pickle.description%>
               </li>
+             
             </ul>
             <a href="/pickle/<%=pickle.id%>" class="details-btn">
               <i class="fas fa-eye"></i> View Details
             </a>
             <form action="/favourite/<%=pickle._id%>" method="POST">
               <Button type="submit">Mark Favourite</Button>
+            </form>
+            <form action="/cart/<%=pickle._id%>" method="POST">
+              <Button type="submit">Add to Cart</Button>
             </form>
           </div>
         </div>
