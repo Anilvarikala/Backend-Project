@@ -1,8 +1,8 @@
 
-const { default: mongoose } = require('mongoose');
-const Favourite = require('../Models/Favourite');
 const Home = require('../Models/Home');
 const User = require('../Models/User');
+const Orders = require('../Models/Orders');
+const { default: mongoose } = require('mongoose');
 
 exports.getHome = (req,res,next) => {
    res.render('store/Home',{
@@ -17,6 +17,7 @@ exports.getPickleDetails = (req, res) => {
             pickle : pickle,
             isLoggedIn : req.session.isLoggedIn,
             user : req.session.user,
+            pickleId : pickleId,
         })
     }).catch(err => console.log(err));   
 }
@@ -54,7 +55,7 @@ exports.getFavouriteRemove = async (req, res) => {
     const user = await User.findById({_id : userId});
     const newfavouritesId = user.favouritesId.filter(id => id.toString() != pickleId);
     user.favouritesId = newfavouritesId;
-    const u = user.save()
+    await user.save()
     res.redirect('/favourites');
 }
 
@@ -99,4 +100,50 @@ exports.getRemovePickleFromCart =  async (req, res) => {
     currUser.cartIds = newCartIds;
     await currUser.save()
     res.redirect("/cart")
+}
+
+exports.getProfileUpdate = (req,res) => {
+    const {firstName, lastName} = req.session.user;
+    res.render("store/profileUpdate", {
+        user : req.session.user,
+    }) 
+}
+
+exports.postProfileUpdate = (req, res) => {
+    const {firstName, lastName} = req.body;
+    req.session.user.firstName = firstName;
+    req.session.user.lastName = lastName;
+    res.redirect("/profile");
+}
+
+exports.postPickleBuy = async (req, res) => {
+    const pickleIdToBuy = req.params.pickleId;
+    const user = req.session.user;
+    const pickleOrder = await Home.findById({_id : pickleIdToBuy});
+    const newOrder = new Orders({
+         userName : user.firstName + " " + user.lastName,
+         address : "Chengicherla",
+         pickleName : pickleOrder.pickleName,
+         grams : pickleOrder.grams,
+         url : pickleOrder.url,
+         price : pickleOrder.price,
+    })
+    await newOrder.save();
+    const currUser = await User.findById({_id : req.session.user._id});
+    if(currUser){
+    currUser.orderIds.push(pickleIdToBuy);
+    await currUser.save();
+    }
+    else{
+        console.log("User not found!...")
+    }
+    res.status(200).redirect("/myorders");
+}
+
+exports.getAllOrders = async (req, res) => {
+   const allOrders = await Orders.find();
+   res.render('store/orders', {
+     allOrders : allOrders,
+   });
+   
 }

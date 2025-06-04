@@ -12,4 +12,8 @@ userRouter.get("/profile", userController.getProfile)
 userRouter.post("/cart/:pickleId", userController.postCartAdd)
 userRouter.get("/cart",userController.getCart)
 userRouter.get("/cart/remove/:pickleId", userController.getRemovePickleFromCart)
+userRouter.get("/profile-update", userController.getProfileUpdate)
+userRouter.post("/profile-update", userController.postProfileUpdate)
+userRouter.post("/order/:pickleId", userController.postPickleBuy)
+userRouter.get("/myorders", userController.getAllOrders);
 module.exports = userRouter;

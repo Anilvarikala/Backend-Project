@@ -24,7 +24,7 @@ const mongoUrl = "mongodb+srv://Anil:Joymax%40123@anil.l5zcbng.mongodb.net/Backe
 
 
 const store = new MongoDBStore({
-  uri :mongoUrl,
+  uri : mongoUrl,
   collection : 'sessions'
 });
 

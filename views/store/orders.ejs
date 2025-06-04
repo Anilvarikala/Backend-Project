@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Here are your orders</h1>
+  <%allOrders && allOrders.map((order) => {%>
+    <ul>
+      <li>Name : <%=order.userName%></li>
+      <li>Address : <%=order.address%></li>
+      <li>Pickle Name : <%=order.pickleName%></li>
+      <img src="<%=order.url%>" alt="ordered pickle Image">
+      <li>No of grams booked : <%=order.grams%></li>
+      <li>Price : <%=order.price%></li>
+
+    </ul>
+  <%})%>
+</body>
+</html>

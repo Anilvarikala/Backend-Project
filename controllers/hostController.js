@@ -7,6 +7,7 @@ exports.getPickleAdd = (req, res) => {
     res.render('host/Form',{
       currPickle : { },
       editing : false,
+      user : req.session.user,
     })
 }
 
@@ -83,6 +84,7 @@ exports.getEditPickle = async (req, res) => {
     res.render("host/Form", {
       currPickle : currPickle,
       editing : true,
+      user : req.session.user,
     })
    // res.send("editing..")
 }
@@ -99,7 +101,7 @@ exports.postEditPickle = async (req, res) => {
    currEditablePickle.price = price;
    currEditablePickle.data = data;
    currEditablePickle.description = description;
-   const done = currEditablePickle.save()
+   const done = await currEditablePickle.save()
    if(done)
    res.redirect("/host/host-pickles");
 }

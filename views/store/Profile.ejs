@@ -9,9 +9,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
 
   <style>
+    :root {
+      --primary-color: #198754;
+      --bg-color: #f4f6f8;
+      --text-color: #333;
+      --label-color: #555;
+      --card-bg: #fff;
+      --btn-bg: #198754;
+      --btn-text: #fff;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f4f6f8;
+      background-color: var(--bg-color);
       margin: 0;
       padding: 0;
       display: flex;
@@ -21,30 +31,71 @@
     }
 
     .user-card {
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      padding: 40px;
-      max-width: 400px;
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      padding: 40px 30px;
+      max-width: 420px;
       width: 90%;
-      text-align: center;
+      text-align: left;
+      transition: all 0.3s ease-in-out;
     }
 
     .user-card h2 {
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       font-weight: 600;
-      color: #333;
+      color: var(--text-color);
+      font-size: 24px;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 10px;
     }
 
-    .user-card .info {
-      margin-bottom: 15px;
-      font-size: 18px;
-      color: #555;
+    .info {
+      margin-bottom: 16px;
+      font-size: 16px;
+      color: var(--label-color);
     }
 
     .label {
       font-weight: 600;
-      color: #222;
+      color: var(--text-color);
+      display: inline-block;
+      min-width: 110px;
+    }
+
+    button {
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #146c43;
+    }
+
+    @media (max-width: 500px) {
+      .user-card {
+        padding: 30px 20px;
+      }
+
+      .user-card h2 {
+        font-size: 20px;
+      }
+
+      .info {
+        font-size: 15px;
+      }
+
+      .label {
+        min-width: 100px;
+      }
     }
   </style>
 </head>
@@ -55,6 +106,9 @@
     <div class="info"><span class="label">Last Name:</span> <%= user.lastName %></div>
     <div class="info"><span class="label">Email:</span> <%= user.email %></div>
     <div class="info"><span class="label">User Type:</span> <%= user.userType %></div>
+    <form action="/profile-update" method="get">
+      <button type="submit">Edit Profile</button>
+    </form>
   </div>
 </body>
 </html>
